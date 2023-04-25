@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* Style the header */
+.nav-links {
+    overflow: hidden;
+    background-color: #070707;
+}
+.nav-links ul li a{
+    float: left;
+    display: block;
+   color: white;
+   padding: auto;
+   text-decoration: none;
+}
+.nav-links a.right{
+    float: left;
+}
+section h2{
+    text-align: center;
+}
+.footer {
+    text-align: center;
+    background: #ddd;
+  }
+  

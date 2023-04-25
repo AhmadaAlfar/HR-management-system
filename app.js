@@ -1,35 +1,59 @@
 "use strict"
-function Employee(EmployeeID, FullName, Department, Level,  Salary) {
+let NameSectionEl = document.getElementById('NameSection');
+let DepartmentSectionEl = document.getElementById('DepartmentSection')
+let myForm = document.getElementById('employeeForm');
+let allEmployee = [];
+function Employee(EmployeeID, FullName, Department, image ,Level,  Salary) {
     this.EmployeeID = EmployeeID;
     this.FullName = FullName;
     this.Department = Department;
     this.Level = Level;
-    this.Image = Image;
+    this.image = image;
     this.Salary = Salary;
-
+    Employee.push(this) ;
 }
-Employee.prototype.calc = function(){
 
-    document.write( Math.floor(Math.random() * max));
+myForm.addEventListener('submit',handelSubmit);
+function handelSubmit(event){
+    event.preventDefault();
+    let FullName = event.target.fName.value;
+    let Department=event.target.Department.value;
 
+    let Level = event.target.level.value;
+    let image = event.target.image.value;
+
+let newEmployee = newEmployee(FullName,Department,Level,image);
+newEmployee.render();
+}
+
+
+Employee.prototype.calc = function(min,max){
+
+    this.Salary = Math.floor(Math.random() * (min - max +1)) + min;
 
 }
 Employee.prototype.render = function () {
+    const EmployeeNameEl = document.createElement('h3');
+    EmployeeNameEl.textContent = this.FullName;
+ 
+    const imgEl = document.createElement('img');
+    imgEl.src = this.image;
 
-    
-    document.write(`the name is :${this.FullName}the salary: ${this.Salary} `)
+    const DepartmentEl = document.createElement('select')
+    for (let i = 0; i < this.Department.length; i++) {
+        let optionEl = document.createElement('option');
+        optionEl.textContent = this.Department[i];
+    NameSectionEl.appendChild(imgEl);
+    NameSectionEl.appendChild(EmployeeNameEl);
+    DepartmentEl.appendChild(optionEl);
+
 }
+}
+DepartmentSectionEl.appendChild('DepartmentEl');
 
-let GhaziSamer = new Employee(1000, 'GhaziSamer', 'Administration', 'Senior',2300);
-let LanaAli = new Employee(1001, 'LanaAli', 'Finance', 'Senior',2300);
-let TamaraAyoub = new Employee(1002, 'TamaraAyoub', 'Marketing', 'Senior',2300);
-let SafiWalid = new Employee(1003, 'SafiWalid', '	Administration', 'Mid-Senior',2000);
-let OmarZaid = new Employee(1004, 'OmarZaid', 'Development', 'Senior',2300);
-let RanaSaleh = new Employee(1005, 'RanaSaleh', 'Development', 'junior',1000);
-let HadiAhmad = new Employee(1006, 'HadiAhmad', 'Finance', 'Mid-Senior',2000);
 
-GhaziSamer.render();
-LanaAli.render();
-TamaraAyoub.render();
-SafiWalid.render();
-OmarZaid.render();
+for (let i = 0; i < allEmployee.length; i++) {
+   
+    allEmployee[i].calc();
+    allEmployee[i].render();
+}
